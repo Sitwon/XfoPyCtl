@@ -10,6 +10,15 @@ class XfoObj:
 	def __init__(self):
 		self.pObj = xfoifc_c.xfo_createXfoObject(None)
 
+	def getErrorCode(self):
+		return xfoifc_c.xfo_getErrorCode(self.pObj)
+
+	def setBatchPrint(self, mode):
+		xfoifc_c.xfo_setBatchPrint(self.pObj, mode)
+
+	def setPrinterName(self, printer):
+		xfoifc_c.xfo_setPrinterName(self.pObj, printer)
+
 	def setErrorStreamType(self, stream_type):
 		xfoifc_c.xfo_setErrorStreamType(self.pObj, stream_type)
 
@@ -19,6 +28,9 @@ class XfoObj:
 	def setDocumentURI(self, uri):
 		xfoifc_c.xfo_setDocumentURI(self.pObj, uri)
 
+	def setDocumentText(self, text):
+		xfoifc_c.xfo_setDocumentText(self.pObj, text)
+
 	def setStylesheetURI(self, uri):
 		xfoifc_c.xfo_setStylesheetURI(self.pObj, uri)
 
@@ -27,6 +39,12 @@ class XfoObj:
 
 	def setOutputFilePath(self, path):
 		xfoifc_c.xfo_setOutputFilePath(self.pObj, path)
+
+	def setExternalXSLT(self, command):
+		xfoifc_c.xfo_setExternalXSLT(self.pObj, command)
+
+	def setXSLTParamFormat(self, param_fmt):
+		xfoifc_c.xfo_setXSLTParamFormat(self.pObj, param_fmt)
 
 	def execute(self):
 		return xfoifc_c.xfo_execute(self.pObj)
