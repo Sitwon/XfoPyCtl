@@ -10,11 +10,20 @@ class XfoObj:
 	def __init__(self):
 		self.pObj = xfoifc_c.xfo_createXfoObject(None)
 
+	def setErrorStreamType(self, stream_type):
+		xfoifc_c.xfo_setErrorStreamType(self.pObj, stream_type)
+
 	def setExitLevel(self, level):
 		xfoifc_c.xfo_setExitLevel(self.pObj, level)
 
 	def setDocumentURI(self, uri):
 		xfoifc_c.xfo_setDocumentURI(self.pObj, uri)
+
+	def setStylesheetURI(self, uri):
+		xfoifc_c.xfo_setStylesheetURI(self.pObj, uri)
+
+	def setOutputFOPath(self, path):
+		xfoifc_c.xfo_setOutputFOPath(self.pObj, path)
 
 	def setOutputFilePath(self, path):
 		xfoifc_c.xfo_setOutputFilePath(self.pObj, path)
