@@ -3,7 +3,7 @@
 import os, sys
 import ctypes
 
-xfoifc_c = ctypes.cdll.LoadLibrary("libXfoInterface.so");
+xfoifc_c = ctypes.cdll.LoadLibrary("libXfoInterface.so")
 
 
 class XfoObj:
