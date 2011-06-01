@@ -16,6 +16,11 @@ class XfoObj:
 	def setFormatterType(self, xfo_type):
 		xfo.xfo_setFormatterType(self.pObj, xfo_type)
 
+	def getDocumentURI(self):
+		cstr = create_string_buffer(1024);
+		xfo.xfo_getDocumentURI.restype = c_char_p
+		return xfo.xfo_getDocumentURI(self.pObj, cstr, 1025)
+
 	def setDocumentURI(self, uri):
 		xfo.xfo_setDocumentURI(self.pObj, uri)
 
