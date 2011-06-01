@@ -193,6 +193,7 @@ class XfoObj:
 		return xfo.xfo_getErrorStreamType(self.pObj)
 
 	def setErrorStreamType(self, stream_type):
+		xfo.xfo_setErrorStreamType.argtypes = [c_void_p, c_int]
 		xfo.xfo_setErrorStreamType(self.pObj, stream_type)
 
 	def getPrinterName(self):
