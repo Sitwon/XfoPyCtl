@@ -1,5 +1,24 @@
-	def createXfoObject(self):
-		return xfoifc_c.xfo_createXfoObject()
+import os
+from ctypes import *
+
+xfoifc_c = None
+if os.name == "nt":
+	try:
+		xfoifc_c = cdll.LoadLibrary("XfoInterface53")
+	except WindowsError:
+		pass
+else:
+	try:
+		xfoifc_c = cdll.LoadLibrary("libXfoInterface.so")
+	except Exception:
+		pass
+
+if xfoifc_c == None:
+	raise StandardError("XfoInterface library was not loaded.")
+
+class XfoObj:
+	def __init__(self):
+		self.pXfoObj = xfoifc_c.xfo_createXfoObject(None)
 
 	def releaseXfoObject(self):
 		xfoifc_c.xfo_releaseXfoObject(self.pXfoObj)
@@ -58,11 +77,11 @@
 	def setOutputFilePath(self, newVal):
 		xfoifc_c.xfo_setOutputFilePath(self.pXfoObj, newVal)
 
-	def getOptionFileURI(self):
+	def getOptionFileURI(self, n):
 		cstr = create_string_buffer(1024)
-		xfoifc_c.xfo_getOptionFileURI.argtypes = [c_void_p, c_char_p, c_int]
+		xfoifc_c.xfo_getOptionFileURI.argtypes = [c_void_p, c_char_p, c_int, c_int]
 		xfoifc_c.xfo_getOptionFileURI.restype = c_char_p
-		return xfoifc_c.xfo_getOptionFileURI(self.pXfoObj, cstr, 1024)
+		return xfoifc_c.xfo_getOptionFileURI(self.pXfoObj, cstr, 1024, n)
 
 	def setOptionFileURI(self, newVal):
 		xfoifc_c.xfo_setOptionFileURI(self.pXfoObj, newVal)
@@ -729,4 +748,21 @@
 
 	def setMifIpMode(self, mode):
 		xfoifc_c.xfo_setMifIpMode(self.pXfoObj, mode)
+
+
+def onMessage(level, code, message):
+	print "Level:", level
+	print "Code:", code
+	print "Message:", message
+	print
+	return None
+
+if __name__=="__main__":
+	import sys
+	xfoObj = XfoObj()
+	xfoObj.setExitLevel(4)
+	xfoObj.setDocumentURI(sys.argv[1])
+	xfoObj.setOutputFilePath(sys.argv[2])
+	xfoObj.setOnMessageProc(onMessage)
+	xfoObj.execute()
 
