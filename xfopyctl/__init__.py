@@ -639,22 +639,14 @@ class XfoObj:
 		xfoifc_c.xfo_clear(self.pXfoObj)
 
 	def setOnMessageProc(self, proc):
-		xfoifc_c.xfo_setOnMessageProc(self.pXfoObj, proc)
-
-	def setOnMessageProcW(self, proc):
-		xfoifc_c.xfo_setOnMessageProcW(self.pXfoObj, proc)
+		self.onMessageProc_CALLBACK = CFUNCTYPE(None, c_int, c_long, c_char_p)
+		self.onMessageProc_callback = self.onMessageProc_CALLBACK(proc)
+		xfoifc_c.xfo_setOnMessageProc(self.pXfoObj, self.onMessageProc_callback)
 
 	def setOnFormatPageProc(self, proc):
-		xfoifc_c.xfo_setOnFormatPageProc(self.pXfoObj, proc)
-
-	def setOnMessageProcEx(self, proc, pAnyObj):
-		xfoifc_c.xfo_setOnMessageProcEx(self.pXfoObj, proc, pAnyObj)
-
-	def setOnMessageProcExW(self, proc, pAnyObj):
-		xfoifc_c.xfo_setOnMessageProcExW(self.pXfoObj, proc, pAnyObj)
-
-	def setOnFormatPageProcEx(self, proc, pAnyObj):
-		xfoifc_c.xfo_setOnFormatPageProcEx(self.pXfoObj, proc, pAnyObj)
+		self.onFormatPageProc_CALLBACK = CFUNCTYPE(None, c_long)
+		self.onFormatPageProc_callback = self.onFormatPageProc_CALLBACK(proc)
+		xfoifc_c.xfo_setOnFormatPageProc(self.pXfoObj, self.onFormatPageProc_callback)
 
 	def setXSLTParam(self, paramName, value):
 		xfoifc_c.xfo_setXSLTParam(self.pXfoObj, paramName, value)
