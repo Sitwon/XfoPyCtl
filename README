@@ -1,2 +1,8 @@
-A Python wrapper for the C API of AH Formatter.
+========
+XfoPyCtl
+========
+
+XfoPyCtl provides python bindings for Antenna House Formatter.
+
+Make sure that Formatter's environment variables are set before trying to use XfoPyCtl. On non-Windows platforms you can source the run.sh script in the install directory.
 
