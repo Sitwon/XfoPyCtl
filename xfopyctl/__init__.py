@@ -1,34 +1,53 @@
-import os
-from ctypes import *
+import os, os.path
+import subprocess
+
+def _mostRecentHome():
+	home = 'AHF53_64_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF53_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF52_64_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF52_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF51_64_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF51_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF50_64_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AHF50_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AXF43_64_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	home = 'AXF43_HOME'
+	if os.environ.has_key(home):
+		return os.environ[home]
+	return ''
 
 class XfoObj:
 	def __init__(self, path=None):
-		self.xfoifc_c = None
+		self.executable = None
 
 		if path == None:
 			if os.name == "nt":
-				try:
-					self.xfoifc_c = cdll.LoadLibrary("XfoInterface53")
-				except WindowsError:
-					pass
+				self.executable = "AHFCmd.exe"
 			else:
-				try:
-					self.xfoifc_c = cdll.LoadLibrary("libXfoInterface.so")
-				except Exception:
-					pass
+				self.executable = os.path.join(_mostRecentHome(), "run.sh")
 		else:
-			try:
-				self.xfoifc_c = cdll.LoadLibrary(path)
-			except Exception:
-				pass
-
-		if self.xfoifc_c == None:
-			raise StandardError("XfoInterface library was not loaded.")
-
-		self.pXfoObj = self.xfoifc_c.xfo_createXfoObject(None)
+			self.executable = path
 
 	def releaseXfoObject(self):
-		self.xfoifc_c.xfo_releaseXfoObject(self.pXfoObj)
+		pass
 
 	def getFormatterType(self):
 		return self.xfoifc_c.xfo_getFormatterType(self.pXfoObj)
