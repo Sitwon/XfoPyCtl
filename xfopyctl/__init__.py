@@ -38,7 +38,6 @@ def _mostRecentHome():
 class XfoObj:
 	def __init__(self, path=None):
 		self.executable = None
-
 		if path == None:
 			if os.name == "nt":
 				self.executable = "AHFCmd.exe"
@@ -46,7 +45,7 @@ class XfoObj:
 				self.executable = os.path.join(_mostRecentHome(), "run.sh")
 		else:
 			self.executable = path
-		self.args = [os.path.basename(self.executable)]
+		self.clear()
 
 	def releaseXfoObject(self):
 		pass
@@ -826,10 +825,11 @@ class XfoObj:
 		self.xfoifc_c.xfo_eraseFontAlias(self.pXfoObj, src)
 
 	def execute(self):
-		return self.xfoifc_c.xfo_execute(self.pXfoObj)
+		p = subprocess.Popen(shlex.split(self.args), executable=self.executable)
+		return p.wait()
 
 	def clear(self):
-		self.xfoifc_c.xfo_clear(self.pXfoObj)
+		self.args = [os.path.basename(self.executable)]
 
 	def setOnMessageProc(self, proc):
 		self.onMessageProc_CALLBACK = CFUNCTYPE(None, c_int, c_long, c_char_p)
