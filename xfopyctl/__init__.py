@@ -1,5 +1,6 @@
 import os, os.path
 import subprocess
+import shlex
 
 def _mostRecentHome():
 	home = 'AHF53_64_HOME'
@@ -45,15 +46,31 @@ class XfoObj:
 				self.executable = os.path.join(_mostRecentHome(), "run.sh")
 		else:
 			self.executable = path
+		self.args = [os.path.basename(self.executable)]
 
 	def releaseXfoObject(self):
 		pass
 
 	def getFormatterType(self):
-		return self.xfoifc_c.xfo_getFormatterType(self.pXfoObj)
+		flag = '-f'
+		try:
+			index = self.args.index(flag)
+			return self.args[index + 1]
+		except:
+			return None
 
 	def setFormatterType(self, newVal):
-		self.xfoifc_c.xfo_setFormatterType(self.pXfoObj, newVal)
+		flag = '-f'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getDocumentURI(self):
 		cstr = create_string_buffer(1024)
@@ -62,7 +79,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getDocumentURI(self.pXfoObj, cstr, 1024)
 
 	def setDocumentURI(self, newVal):
-		self.xfoifc_c.xfo_setDocumentURI(self.pXfoObj, newVal)
+		flag = '-d'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getStylesheetURI(self):
 		cstr = create_string_buffer(1024)
@@ -71,7 +98,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getStylesheetURI(self.pXfoObj, cstr, 1024)
 
 	def setStylesheetURI(self, newVal):
-		self.xfoifc_c.xfo_setStylesheetURI(self.pXfoObj, newVal)
+		flag = '-s'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def addUserStylesheetURI(self, newVal):
 		self.xfoifc_c.xfo_addUserStylesheetURI(self.pXfoObj, newVal)
@@ -92,7 +129,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getHtmlDefaultCharset(self.pXfoObj, cstr, 1024)
 
 	def setHtmlDefaultCharset(self, newVal):
-		self.xfoifc_c.xfo_setHtmlDefaultCharset(self.pXfoObj, newVal)
+		flag = '-htmlcs'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getOutputFilePath(self):
 		cstr = create_string_buffer(1024)
@@ -101,7 +148,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getOutputFilePath(self.pXfoObj, cstr, 1024)
 
 	def setOutputFilePath(self, newVal):
-		self.xfoifc_c.xfo_setOutputFilePath(self.pXfoObj, newVal)
+		flag = '-o'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getOptionFileURI(self, n):
 		cstr = create_string_buffer(1024)
@@ -110,7 +167,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getOptionFileURI(self.pXfoObj, cstr, 1024, n)
 
 	def setOptionFileURI(self, newVal):
-		self.xfoifc_c.xfo_setOptionFileURI(self.pXfoObj, newVal)
+		flag = '-i'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def addOptionFileURI(self, newVal):
 		self.xfoifc_c.xfo_addOptionFileURI(self.pXfoObj, newVal)
@@ -143,7 +210,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getBaseURI(self.pXfoObj, cstr, 1024)
 
 	def setBaseURI(self, newVal):
-		self.xfoifc_c.xfo_setBaseURI(self.pXfoObj, newVal)
+		flag = '-base'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getXSLTParamFormat(self):
 		cstr = create_string_buffer(1024)
@@ -158,22 +235,72 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getStartPage(self.pXfoObj)
 
 	def setStartPage(self, newVal):
-		self.xfoifc_c.xfo_setStartPage(self.pXfoObj, newVal)
+		flag = '-start'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getEndPage(self):
 		return self.xfoifc_c.xfo_getEndPage(self.pXfoObj)
 
 	def setEndPage(self, newVal):
-		self.xfoifc_c.xfo_setEndPage(self.pXfoObj, newVal)
+		flag = '-end'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def setPdfMasterPassword(self, newVal):
-		self.xfoifc_c.xfo_setPdfMasterPassword(self.pXfoObj, newVal)
+		flag = '-ownerpwd'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def setPdfOwnerPassword(self, newVal):
-		self.xfoifc_c.xfo_setPdfOwnerPassword(self.pXfoObj, newVal)
+		flag = '-ownerpwd'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def setPdfUserPassword(self, newVal):
-		self.xfoifc_c.xfo_setPdfUserPassword(self.pXfoObj, newVal)
+		flag = '-userpwd'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def setPdfNoPrinting(self, newVal):
 		self.xfoifc_c.xfo_setPdfNoPrinting(self.pXfoObj, newVal)
@@ -206,7 +333,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getPdfNoAddingOrChangingComments(self.pXfoObj)
 
 	def setPdfVersion(self, newVal):
-		self.xfoifc_c.xfo_setPdfVersion(self.pXfoObj, newVal)
+		flag = '-pdfver'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getPdfVersion(self):
 		return self.xfoifc_c.xfo_getPdfVersion(self.pXfoObj)
@@ -239,7 +376,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getPdfEmbedAllFonts(self.pXfoObj)
 
 	def setPdfEmbedAllFonts(self, newVal):
-		self.xfoifc_c.xfo_setPdfEmbedAllFonts(self.pXfoObj, newVal)
+		flag = '-peb'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getPdfEmbedFonts(self):
 		cstr = create_string_buffer(1024)
@@ -248,7 +395,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getPdfEmbedFonts(self.pXfoObj, cstr, 1024)
 
 	def setPdfEmbedFonts(self, newVal):
-		self.xfoifc_c.xfo_setPdfEmbedFonts(self.pXfoObj, newVal)
+		flag = '-peb'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getPdfErrorOnEmbedFault(self):
 		return self.xfoifc_c.xfo_getPdfErrorOnEmbedFault(self.pXfoObj)
@@ -635,7 +792,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getExitLevel(self.pXfoObj)
 
 	def setExitLevel(self, newVal):
-		self.xfoifc_c.xfo_setExitLevel(self.pXfoObj, newVal)
+		flag = '-extlevel'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getErrorLevel(self):
 		return self.xfoifc_c.xfo_getErrorLevel(self.pXfoObj)
@@ -693,7 +860,17 @@ class XfoObj:
 		return self.xfoifc_c.xfo_getPrinterName(self.pXfoObj, cstr, 1024)
 
 	def setPrinterName(self, newVal):
-		self.xfoifc_c.xfo_setPrinterName(self.pXfoObj, newVal)
+		flag = '-p'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = newVal
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(newVal)
 
 	def getFormattedPages(self):
 		return self.xfoifc_c.xfo_getFormattedPages(self.pXfoObj)
