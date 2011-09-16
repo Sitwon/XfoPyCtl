@@ -825,16 +825,58 @@ class XfoObj:
 		self.xfoifc_c.xfo_eraseFontAlias(self.pXfoObj, src)
 
 	def execute(self):
-		p = subprocess.Popen(shlex.split(self.args), executable=self.executable)
-		return p.wait()
+		p = subprocess.Popen(shlex.split(self.args), executable=self.executable, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		if (self.on_message_proc):
+			self._handleErrorMessages(p)
+		else:
+			p.wait()
+		return p.returncode
+
+	def _handleErrorMessages(self, p):
+		stdout, stderr = p.communicate()
+		self._parseErrorString(stderr)
+
+	def _parseErrorString(self, errors):
+		lvl = None
+		code = None
+		msg = None
+		self.errors = [ x.strip() for x in stderr.split('\n') ]
+		pos = 0
+		while (pos < len(self.errors)):
+			pos = self._parseErrorLine(pos)
+
+	def _parseErrorLine(self, pos):
+		if ((self.errors[pos].startswith("XSLCmd :") or self.errors[pos].startswith("AHFCmd :")) and (self.errors[pos].find("Error Level") >= 0)):
+			return self._parseError(pos)
+		elif (self.errors[pos].startswith("Invalid license.")):
+			return self._invalidLicense(pos)
+		return pos + 1
+
+	def _parseError(self, pos):
+		ErrorLevel = int(self.errors[pos][-1:])
+		pos += 1
+		if (pos >= len(self.errors)):
+			return pos
+		ErrorCode = int(self.errors[pos][-1:])
+		pos += 1
+		if (pos >= len(self.errors)):
+			return pos
+		ErrorMessage = self.errors[pos].split(" ", 2)[2]
+		pos += 1
+		if ((pos < len(self.errors)) and (self.errors[pos].startswith("XSLCmd :") or self.errors[pos].startswith("AHFCmd :"))):
+			ErrorMessage += "\n" + self.errors[pos].split(" ", 2)[2]
+			pos += 1
+		if (this.on_message_proc):
+			self.on_message_proc(ErrorLevel, ErrorCode, ErrorMessage)
+		return pos
+
 
 	def clear(self):
+		self.on_message_proc = None
 		self.args = [os.path.basename(self.executable)]
 
 	def setOnMessageProc(self, proc):
-		self.onMessageProc_CALLBACK = CFUNCTYPE(None, c_int, c_long, c_char_p)
-		self.onMessageProc_callback = self.onMessageProc_CALLBACK(proc)
-		self.xfoifc_c.xfo_setOnMessageProc(self.pXfoObj, self.onMessageProc_callback)
+		self.on_message_proc = proc
 
 	def setOnFormatPageProc(self, proc):
 		self.onFormatPageProc_CALLBACK = CFUNCTYPE(None, c_long)
