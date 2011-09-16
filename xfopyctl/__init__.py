@@ -68,7 +68,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getDocumentURI(self):
 		cstr = create_string_buffer(1024)
@@ -87,7 +87,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getStylesheetURI(self):
 		cstr = create_string_buffer(1024)
@@ -106,7 +106,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def addUserStylesheetURI(self, newVal):
 		self.xfoifc_c.xfo_addUserStylesheetURI(self.pXfoObj, newVal)
@@ -137,7 +137,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getOutputFilePath(self):
 		cstr = create_string_buffer(1024)
@@ -156,7 +156,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getOptionFileURI(self, n):
 		cstr = create_string_buffer(1024)
@@ -175,7 +175,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def addOptionFileURI(self, newVal):
 		self.xfoifc_c.xfo_addOptionFileURI(self.pXfoObj, newVal)
@@ -218,7 +218,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getXSLTParamFormat(self):
 		cstr = create_string_buffer(1024)
@@ -243,7 +243,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getEndPage(self):
 		return self.xfoifc_c.xfo_getEndPage(self.pXfoObj)
@@ -259,7 +259,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def setPdfMasterPassword(self, newVal):
 		flag = '-ownerpwd'
@@ -272,7 +272,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def setPdfOwnerPassword(self, newVal):
 		flag = '-ownerpwd'
@@ -285,7 +285,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def setPdfUserPassword(self, newVal):
 		flag = '-userpwd'
@@ -298,7 +298,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def setPdfNoPrinting(self, newVal):
 		self.xfoifc_c.xfo_setPdfNoPrinting(self.pXfoObj, newVal)
@@ -341,7 +341,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getPdfVersion(self):
 		return self.xfoifc_c.xfo_getPdfVersion(self.pXfoObj)
@@ -384,7 +384,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getPdfEmbedFonts(self):
 		cstr = create_string_buffer(1024)
@@ -403,7 +403,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getPdfErrorOnEmbedFault(self):
 		return self.xfoifc_c.xfo_getPdfErrorOnEmbedFault(self.pXfoObj)
@@ -800,7 +800,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getErrorLevel(self):
 		return self.xfoifc_c.xfo_getErrorLevel(self.pXfoObj)
@@ -911,7 +911,7 @@ class XfoObj:
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(newVal)
+			self.args.append(str(newVal))
 
 	def getFormattedPages(self):
 		return self.xfoifc_c.xfo_getFormattedPages(self.pXfoObj)
