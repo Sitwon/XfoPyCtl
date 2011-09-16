@@ -1,6 +1,5 @@
 import os, os.path
 import subprocess
-import shlex
 
 def _mostRecentHome():
 	home = 'AHF53_64_HOME'
@@ -825,7 +824,7 @@ class XfoObj:
 		self.xfoifc_c.xfo_eraseFontAlias(self.pXfoObj, src)
 
 	def execute(self):
-		p = subprocess.Popen(shlex.split(self.args), executable=self.executable, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		p = subprocess.Popen(self.args, executable=self.executable, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		if (self.on_message_proc):
 			self._handleErrorMessages(p)
 		else:
