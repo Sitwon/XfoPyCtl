@@ -824,7 +824,7 @@ class XfoObj:
 		self.xfoifc_c.xfo_eraseFontAlias(self.pXfoObj, src)
 
 	def execute(self):
-		p = subprocess.Popen([str(x) for x in self.args], executable=self.executable, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		p = subprocess.Popen(self.args, executable=self.executable, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		if (self.on_message_proc):
 			self._handleErrorMessages(p)
 		else:
