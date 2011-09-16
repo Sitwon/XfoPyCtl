@@ -839,7 +839,7 @@ class XfoObj:
 		lvl = None
 		code = None
 		msg = None
-		self.errors = [ x.strip() for x in stderr.split('\n') ]
+		self.errors = [ x.strip() for x in errors.split('\n') ]
 		pos = 0
 		while (pos < len(self.errors)):
 			pos = self._parseErrorLine(pos)
