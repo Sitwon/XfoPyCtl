@@ -865,7 +865,7 @@ class XfoObj:
 		if ((pos < len(self.errors)) and (self.errors[pos].startswith("XSLCmd :") or self.errors[pos].startswith("AHFCmd :"))):
 			ErrorMessage += "\n" + self.errors[pos].split(" ", 2)[2]
 			pos += 1
-		if (this.on_message_proc):
+		if (self.on_message_proc):
 			self.on_message_proc(ErrorLevel, ErrorCode, ErrorMessage)
 		return pos
 
