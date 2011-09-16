@@ -856,7 +856,7 @@ class XfoObj:
 		pos += 1
 		if (pos >= len(self.errors)):
 			return pos
-		ErrorCode = int(self.errors[pos][-1:])
+		ErrorCode = int(self.errors[pos].split(" ")[len(self.errors[pos].split(" ")) - 2])
 		pos += 1
 		if (pos >= len(self.errors)):
 			return pos
