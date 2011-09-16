@@ -62,7 +62,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -81,7 +81,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -100,7 +100,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -131,7 +131,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -150,7 +150,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -169,7 +169,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -212,7 +212,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -237,7 +237,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -253,7 +253,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -266,7 +266,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -279,7 +279,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -292,7 +292,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -335,7 +335,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -378,7 +378,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -397,7 +397,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -794,7 +794,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
@@ -905,7 +905,7 @@ class XfoObj:
 		try:
 			index = self.args.index(flag)
 			if (newVal != None):
-				self.args[index + 1] = newVal
+				self.args[index + 1] = str(newVal)
 			else:
 				self.args.pop(index)
 				self.args.pop(index)
