@@ -874,7 +874,7 @@ class XfoObj:
 
 	def clear(self):
 		self.on_message_proc = None
-		self.args = [os.path.basename(self.executable)]
+		self.args = [self.executable]
 
 	def setOnMessageProc(self, proc):
 		self.on_message_proc = proc
