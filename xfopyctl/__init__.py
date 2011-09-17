@@ -869,6 +869,8 @@ class XfoObj:
 			self.on_message_proc(ErrorLevel, ErrorCode, ErrorMessage)
 		return pos
 
+	def getErrors(self):
+		return self.errors
 
 	def clear(self):
 		self.on_message_proc = None
