@@ -597,14 +597,10 @@ class XfoObj:
 		flag = '-tpdf'
 		try:
 			index = self.args.index(flag)
-			if (newVal != None):
-				self.args[index + 1] = str(newVal)
-			else:
-				self.args.pop(index)
+			if (newVal != True):
 				self.args.pop(index)
 		except:
 			self.args.append(flag)
-			self.args.append(str(newVal))
 
 	def getPdfOutputWidth(self):
 		cstr = create_string_buffer(1024)
