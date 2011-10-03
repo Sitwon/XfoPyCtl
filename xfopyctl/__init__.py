@@ -586,10 +586,25 @@ class XfoObj:
 		self.xfoifc_c.xfo_setTwoPassFormatting(self.pXfoObj, newVal)
 
 	def getPdfTag(self):
-		return self.xfoifc_c.xfo_getPdfTag(self.pXfoObj)
+		flag = '-tpdf'
+		try:
+			index = self.args.index(flag)
+			return self.args[index + 1]
+		except:
+			return None
 
 	def setPdfTag(self, newVal):
-		self.xfoifc_c.xfo_setPdfTag(self.pXfoObj, newVal)
+		flag = '-tpdf'
+		try:
+			index = self.args.index(flag)
+			if (newVal != None):
+				self.args[index + 1] = str(newVal)
+			else:
+				self.args.pop(index)
+				self.args.pop(index)
+		except:
+			self.args.append(flag)
+			self.args.append(str(newVal))
 
 	def getPdfOutputWidth(self):
 		cstr = create_string_buffer(1024)
